@@ -1,4 +1,3 @@
-from genericpath import isfile
 import random
 import json
 import os
@@ -76,13 +75,14 @@ class Validator:
                 print("\n[ERROR]: Try again!")
                 continue
 
-            if value >= min_val and value <= max_val:
-                break
-            elif min_val != value:
-                print(f"\n[ERROR]: Enter a {min_val} number to go back!")
+            if len(number_range) > 1:
+                if value >= min_val and value <= max_val:
+                    break
+                else:
+                    print(f"\n[ERROR]: Enter a number between {min_val}-{max_val}!")
+                    continue
             else:
-                print(f"\n[ERROR]: Enter a number between {min_val}-{max_val}!")
-                continue
+                print(f"\n[ERROR]: Enter valid number to use this option!")
         return value
 
     def show_errors(self):
@@ -152,7 +152,7 @@ class Stats:
     
     def export_stats(self, word):
         user_input = Validator().get_integer_input(
-            "Do you want to save your score?\n\n"
+            "\nDo you want to save your score?\n\n"
             "[1] Yes\n"
             "[2] No\n\n"
             "Your choice: ",
@@ -170,9 +170,9 @@ class Stats:
         if user_input == 1:
             file_name = "highscores.txt"
             with open(file_name, "a") as f:
-                f.write(f"Guessed: {word} - [{len(word)} letter word] [{mode} mode] [{self.tries} tries left] [max {self.settings.settings_tries} tries]\n")
+                f.write(f"Guessed: {word} - [{len(word)} letter word] [mode: {mode}] [tries left: {self.tries}] [max tries: {self.settings.settings_tries}] [hints: {self.settings.settings_hints}]\n")
             if os.path.isfile(file_name):
-                print(f"\nYour score has been successfully saved to {file_name}!")
+                print(f"\n[Your score has been successfully saved to {file_name}!]")
 
 class Player:
     def __init__(self):
@@ -220,12 +220,11 @@ class Engine:
         print(f"- {len(word)} letters")
     
     def determine_end(self):
-        # here
         if self.player.stats.tries == 0 and self.player.stats.bulls != len(self.words.engine_word):
-            print("[LOSE]: No more tries! Better luck next time!\n")
+            print("[LOSE]: No more tries! Better luck next time!")
             return True
         elif self.player.stats.bulls == len(self.words.engine_word):
-            print("[WIN]: Congratz, you rock!\n")
+            print("[WIN]: Congratz, you rock!")
             self.player.stats.export_stats(self.words.engine_word)
             return True
         else:
