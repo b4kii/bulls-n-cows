@@ -1,5 +1,5 @@
 {
-    "hints": false,
-    "tries": 10,
-    "level": 0
+    "hints": true,
+    "tries": 2,
+    "level": 1
 }

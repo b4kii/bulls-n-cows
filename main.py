@@ -135,8 +135,20 @@ class Stats:
         self.bulls = bulls
         self.cows = cows
 
-    def show_stats(self):
-        print(f"[SCORE]: {self.bulls} Bulls, {self.cows} Cows. You have {self.tries} tries left!")
+    def show_stats(self, player_word, engine_word, hint):
+        print("\nGuess the word: ", end=" ")
+        i = 0
+        for letter in engine_word:
+            char = " "
+            if letter == player_word[i]:
+                if hint:
+                    char = letter
+
+            print(f"[{char}]", end=" ")
+
+            i += 1
+
+        print(f"\n[SCORE]: {self.bulls} Bulls, {self.cows} Cows. You have {self.tries} tries left!")
     
     def reset_stats(self):
         self.bulls = 0
@@ -188,27 +200,16 @@ class Engine:
         self.player = Player()
         self.words = Words()
 
-    def score_logic(self, player_word, engine_word, hint):
+    def score_logic(self, player_word, engine_word):
         bulls = 0
         cows = 0
         i = 0
-
-        print("\nGuess the word: ", end=" ")
         for letter in engine_word:
-            char = " "
             if player_word.count(letter) and letter != player_word[i]:
                 cows += 1
             if letter == player_word[i]:
-                if hint:
-                    char = letter
-
                 bulls += 1
-            print(f"[{char}]", end=" ")
-
             i += 1
-
-        print()
-        print()
         self.player.stats.update_stats(bulls, cows)
 
     def initial_message(self, word):
@@ -245,7 +246,7 @@ class Game:
             clear()
             x.words.generate_word(x.player.stats.settings.settings_level)
             engine_word = x.words.engine_word
-            print(f"[TEST] {engine_word}") # helper
+            print(f"[DEBUG] {engine_word}") # helper, to delete
             x.initial_message(engine_word)
             play = True
             
@@ -257,11 +258,11 @@ class Game:
                 validate = Validator()
 
                 if validate.isUnique(player_word) and validate.isLengthEqual(player_word, engine_word):
-                    x.score_logic(player_word, engine_word, x.player.stats.settings.settings_hints)
+                    x.score_logic(player_word, engine_word)
                 else:
                     validate.show_errors()
 
-                x.player.stats.show_stats()
+                x.player.stats.show_stats(player_word, engine_word, x.player.stats.settings.settings_hints)
                 play = not x.determine_end()
 
                 x.player.stats.reset_stats()
@@ -274,9 +275,7 @@ class Game:
 
             x.player.stats.reset_tries()
 
-            if continuing == 1:
-                continue
-            else:
+            if continuing == 2:
                 game_run = False
 
 class Menu:
