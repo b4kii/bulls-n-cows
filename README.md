@@ -1,1 +1,1 @@
-# Terminat, text game project
+# Simple text game in terminal
