@@ -1,6 +1,6 @@
 import os
 
-from validator import Validator
+from MainGame.validator import Validator
 
 clear = lambda: os.system("cls" if os.name == "nt" else "clear")
 

@@ -1,6 +1,6 @@
 import os
 
-from stats import Stats
+from MainGame.stats import Stats
 
 class Player:
     def __init__(self):

@@ -1,4 +1,0 @@
-EASY_MODE = "./easy.txt"
-NORMAL_MODE = "./normal.txt"
-HARD_MODE = "./hard.txt"
-RULES = "\nTekstowa gra, w której komputer (Host) losuje słowo, które jest izogramem (izogram jest to wyraz, w którym nie powtarzają się żadne litery) i informuje użytkownika (Guesser) o ilości liter w słowie. Użytkownik (Guesser) stara się zgadnąć co to za słowo. Komputer (Host) po każdej próbie zwraca liczbe Cows & Bulls. Liczba przy słowie Cows oznacza literę występującą w słowie lecz na złej pozycji, liczba przy słowie Bulls oznacza poprawną literę na poprawnej pozycji. Gra kończy się kiedy liczba przy Bulls będzie taka sama jak długość słowa wylosowanego przez komputer."

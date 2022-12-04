@@ -1,8 +1,8 @@
 import os
 
-from settings import Settings
-from validator import Validator
-from level import Level
+from MainGame.settings import Settings
+from MainGame.validator import Validator
+from MainGame.level import Level
 
 class Stats:
     def __init__(self, bulls = 0, cows = 0):

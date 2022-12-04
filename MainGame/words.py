@@ -1,6 +1,6 @@
 import random
-from level import Level
-import constants as c
+from MainGame.level import Level
+import MainGame.constants as c
 
 class Words:
     def __init__(self):

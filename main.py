@@ -1,9 +1,9 @@
 import os
-import constants as c
+import MainGame.constants as c
 
-from validator import Validator
-from engine import Engine
-from game import Game
+from MainGame.validator import Validator
+from MainGame.engine import Engine
+from MainGame.game import Game
 
 clear = lambda: os.system("cls" if os.name == "nt" else "clear")
 

@@ -1,4 +1,7 @@
 import json
+import os
+
+from MainGame.constants import SETTINGS_FILE
 
 class Settings:
     def __init__(self):
@@ -9,7 +12,7 @@ class Settings:
 
     def get_config(self):
         try:
-            with open("config.json", "r") as config_file:
+            with open(SETTINGS_FILE) as config_file:
                 config = json.load(config_file)
                 config_keys = []
                 for key in config.keys():
@@ -21,14 +24,14 @@ class Settings:
     
     def update_config(self):
         try:
-            with open("config.json", "r") as config_file:
+            with open(SETTINGS_FILE, "r") as config_file:
                 config = json.load(config_file)
 
             config["hints"] = self.settings_hints
             config["tries"] = self.settings_tries
             config["level"] = self.settings_level
 
-            with open("config.json", "w") as config_file:
+            with open(SETTINGS_FILE, "w") as config_file:
                 json.dump(config, config_file, indent=4)
 
         except FileNotFoundError:

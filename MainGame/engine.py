@@ -1,6 +1,6 @@
-from player import Player
-from words import Words
-from level import Level
+from MainGame.player import Player
+from MainGame.words import Words
+from MainGame.level import Level
 
 class Engine:
     def __init__(self):
